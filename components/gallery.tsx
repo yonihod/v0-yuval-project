@@ -10,33 +10,33 @@ import { Button } from "@/components/ui/button"
 const galleryImages = [
   {
     src: "/gallery/inspection-1.jpg",
-    alt: "בדיקת ליקויי בנייה",
-    title: "בדיקת קירות",
+    alt: "בדיקת אינסטלציה",
+    title: "בדיקת מערכות ניקוז",
   },
   {
     src: "/gallery/inspection-2.jpg",
-    alt: "בדיקת רטיבות",
-    title: "איתור נזילות",
+    alt: "בדיקת מפלס דלת",
+    title: "בדיקת מפלס וישור דלתות",
   },
   {
     src: "/gallery/inspection-3.jpg",
-    alt: "בדיקת תשתיות",
-    title: "בדיקת תשתיות חשמל",
+    alt: "בדיקת שיפועי ריצוף",
+    title: "בדיקת שיפועים במרפסת",
   },
   {
     src: "/gallery/inspection-4.jpg",
-    alt: "דוח הנדסי",
-    title: "הכנת דוח מפורט",
+    alt: "בדיקה עם לייזר",
+    title: "בדיקת ישרות קירות בלייזר",
   },
   {
     src: "/gallery/inspection-5.jpg",
-    alt: "בדיקת גג",
-    title: "בדיקת איטום גג",
+    alt: "איתור נזילות ורטיבות",
+    title: "בדיקת מערכות אינסטלציה",
   },
   {
-    src: "/gallery/inspection-6.jpg",
-    alt: "בדיקת רצפה",
-    title: "בדיקת ריצוף",
+    src: "/gallery/inspection-1.jpg",
+    alt: "בדיקת איכות ריצוף",
+    title: "בדיקת איכות ריצוף וניקוז",
   },
 ]
 

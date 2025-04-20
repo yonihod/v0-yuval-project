@@ -22,21 +22,21 @@ export default function Hero() {
                 </Link>
               </Button>
               <Button asChild variant="outline" size="lg">
-                <Link href="#services">שירותים שלנו</Link>
+                <Link href="tel:0506427772">050-642-7772</Link>
               </Button>
             </div>
             <div className="grid grid-cols-2 gap-4 pt-4">
               <div className="flex items-center gap-2 text-right">
                 <div>
                   <h3 className="font-medium">מהנדס אזרחי</h3>
-                  <p className="text-sm text-muted-foreground">ניסיון רב בתחום</p>
+                  <p className="text-sm text-muted-foreground">בדיקה על ידי מהנדס מוסמך</p>
                 </div>
                 <Ruler className="h-8 w-8 text-blue-600" />
               </div>
               <div className="flex items-center gap-2 text-right">
                 <div>
                   <h3 className="font-medium">דוחות מפורטים</h3>
-                  <p className="text-sm text-muted-foreground">תיעוד מקצועי</p>
+                  <p className="text-sm text-muted-foreground">קבילים בבית המשפט</p>
                 </div>
                 <Shield className="h-8 w-8 text-blue-600" />
               </div>
@@ -46,7 +46,13 @@ export default function Hero() {
             <div className="aspect-square overflow-hidden rounded-full bg-gradient-to-tr from-blue-600 to-blue-400 p-1 shadow-xl">
               <div className="h-full w-full rounded-full bg-white p-4">
                 <div className="h-full w-full rounded-full overflow-hidden relative">
-                  <Image src="/hero-image.jpg" alt="בדק בית מקצועי" fill className="object-cover" priority />
+                  <Image
+                    src="/engineer-portrait.jpg"
+                    alt="יובל חודפי - מהנדס אזרחי"
+                    fill
+                    className="object-cover"
+                    priority
+                  />
                 </div>
               </div>
             </div>

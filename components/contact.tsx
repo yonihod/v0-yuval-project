@@ -66,14 +66,18 @@ export default function Contact() {
                   <Phone className="h-5 w-5 text-blue-600" />
                   <div>
                     <p className="font-medium">טלפון</p>
-                    <p className="text-sm text-muted-foreground">050-642-7772</p>
+                    <Link href="tel:0506427772" className="text-sm text-blue-600 hover:underline">
+                      050-642-7772
+                    </Link>
                   </div>
                 </div>
                 <div className="flex items-center gap-3">
                   <Mail className="h-5 w-5 text-blue-600" />
                   <div>
                     <p className="font-medium">אימייל</p>
-                    <p className="text-sm text-muted-foreground">contour-bedek@gmail.com</p>
+                    <Link href="mailto:contour-bedek@gmail.com" className="text-sm text-blue-600 hover:underline">
+                      contour-bedek@gmail.com
+                    </Link>
                   </div>
                 </div>
                 <div className="flex items-center gap-3">
