@@ -47,11 +47,10 @@ export default function Navbar() {
         </Button>
       </div>
 
-      {/* Mobile menu */}
       <div
         className={cn(
           "fixed inset-0 top-16 z-50 grid h-[calc(100vh-4rem)] grid-flow-row auto-rows-max overflow-auto p-6 pb-32 shadow-md animate-in md:hidden bg-background",
-          isMenuOpen ? "slide-in-from-top-80" : "hidden",
+          isMenuOpen ? "slide-in-from-top-80" : "hidden"
         )}
       >
         <div className="flex flex-col gap-4">

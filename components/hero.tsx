@@ -1,29 +1,53 @@
+"use client"
 import Image from "next/image"
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
 import { Ruler, Shield, Home, CheckCircle, Phone } from "lucide-react"
 
 export default function Hero() {
+  const scrollToContact = (e: React.MouseEvent<HTMLAnchorElement>) => {
+    e.preventDefault()
+    const contactSection = document.getElementById('contact')
+    if (contactSection) {
+      contactSection.scrollIntoView({ behavior: 'smooth' })
+    }
+  }
+
   return (
     <section className="relative overflow-hidden py-20 md:py-32 bg-gradient-to-b from-gray-50 to-white">
-      <div className="absolute inset-0 bg-[url('/blueprint-pattern.svg')] opacity-5"></div>
-      <div className="container px-4 md:px-6">
+      <div className="absolute inset-0 bg-[url('/blueprint-pattern.svg')] opacity-5 pointer-events-none"></div>
+      <div className="container px-4 md:px-6 relative z-10">
         <div className="grid gap-6 lg:grid-cols-2 lg:gap-12 items-center">
           <div className="mx-auto w-full max-w-[500px] lg:ml-0 relative">
-            <div className="aspect-square overflow-hidden rounded-full bg-gradient-to-tr from-brand-red to-red-700 p-1 shadow-xl">
-              <div className="h-full w-full rounded-full bg-white p-4">
-                <div className="h-full w-full rounded-full overflow-hidden relative">
-                  <Image
-                    src="/engineer-portrait.jpg"
-                    alt="יובל חודפי - מהנדס אזרחי"
-                    fill
-                    className="object-cover object-[100%_35%] translate-x-[-5%]"
-                    priority
-                  />
+            <div className="aspect-square overflow-hidden rounded-full bg-gradient-to-tr from-brand-red to-red-700 p-1 shadow-xl group perspective">
+              <div className="relative h-full w-full duration-1000 preserve-3d group-hover:rotate-y-180">
+                {/* Front side - current image */}
+                <div className="absolute h-full w-full rounded-full bg-white p-4 backface-hidden">
+                  <div className="h-full w-full rounded-full overflow-hidden relative">
+                    <Image
+                      src="/engineer-portrait.jpg"
+                      alt="יובל חודפי - מהנדס אזרחי"
+                      fill
+                      className="object-cover object-[100%_35%] translate-x-[-5%]"
+                      priority
+                    />
+                  </div>
+                </div>
+                {/* Back side - working image */}
+                <div className="absolute h-full w-full rounded-full bg-white p-4 rotate-y-180 backface-hidden">
+                  <div className="h-full w-full rounded-full overflow-hidden relative">
+                    <Image
+                      src="/engineer-working.jpg"
+                      alt="יובל חודפי בעבודה"
+                      fill
+                      className="object-cover"
+                      priority
+                    />
+                  </div>
                 </div>
               </div>
             </div>
-            <div className="absolute -bottom-6 -left-6 rounded-lg bg-white p-4 shadow-lg">
+            <div className="absolute -bottom-4 -left-2 md:-bottom-6 md:-left-6 rounded-lg bg-white md:p-4 p-2 shadow-lg">
               <div className="flex items-center gap-2">
                 <Home className="h-8 w-8 text-brand-red" />
                 <div>
@@ -40,10 +64,10 @@ export default function Hero() {
             </div>
             <div className="flex flex-col gap-2 min-[400px]:flex-row justify-end">
               <Button asChild size="lg" className="gap-1">
-                <Link href="https://wa.me/972506427772?text=היי, אשמח לקבוע בדיקת בדק בית">
+                <a href="#contact" onClick={scrollToContact}>
                   <CheckCircle className="h-5 w-5 ml-1" />
                   קבע בדיקה
-                </Link>
+                </a>
               </Button>
               <Button asChild variant="outline" size="lg">
                 <Link href="https://wa.me/972506427772">

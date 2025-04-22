@@ -15,7 +15,7 @@ export default function About() {
                 src="/engineer-portrait.jpg"
                 alt="יובל חודפי - מהנדס אזרחי"
                 fill
-                className="object-cover object-[100%_35%] translate-x-[-5%]"
+                className="object-cover md:object-[100%_35%] md:translate-x-[-5%]"
                 priority
               />
             </div>
