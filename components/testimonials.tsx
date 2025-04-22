@@ -40,11 +40,11 @@ export default function Testimonials() {
           {testimonials.map((testimonial, index) => (
             <Card key={index} className="h-full">
               <CardContent className="p-6 flex flex-col h-full">
-                <Quote className="h-8 w-8 text-blue-600 mb-4" />
+                <Quote className="h-8 w-8 text-brand-red mb-4" />
                 <p className="flex-1 text-muted-foreground mb-4">{testimonial.content}</p>
                 <div className="flex items-center gap-4">
                   <Avatar>
-                    <AvatarFallback className="bg-blue-100 text-blue-600">
+                    <AvatarFallback className="bg-red-100 text-brand-red">
                       {testimonial.name
                         .split(" ")
                         .map((n) => n[0])

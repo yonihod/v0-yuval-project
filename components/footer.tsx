@@ -1,6 +1,6 @@
 import Link from "next/link"
 import Image from "next/image"
-import { Instagram, Facebook, Mail, Phone } from "lucide-react"
+import { InstagramIcon, FacebookIcon, Mail, Phone, MessageSquare } from "lucide-react"
 
 export default function Footer() {
   return (
@@ -14,24 +14,24 @@ export default function Footer() {
             </div>
             <p className="text-slate-300 max-w-xs">בדק בית מקצועי – לדאוג לבית שלך לפני שהדברים מסתבכים!</p>
             <div className="flex space-x-4">
+              <Link href="https://wa.me/972506427772" className="text-slate-300 hover:text-white">
+                <MessageSquare className="h-5 w-5" />
+                <span className="sr-only">וואטסאפ</span>
+              </Link>
               <Link href="https://www.instagram.com/yuval.hodefi" className="text-slate-300 hover:text-white">
-                <Instagram className="h-5 w-5" />
+                <InstagramIcon className="h-5 w-5" />
                 <span className="sr-only">אינסטגרם</span>
               </Link>
               <Link
                 href="https://www.facebook.com/profile.php?id=61574141625757"
                 className="text-slate-300 hover:text-white"
               >
-                <Facebook className="h-5 w-5" />
+                <FacebookIcon className="h-5 w-5" />
                 <span className="sr-only">פייסבוק</span>
               </Link>
               <Link href="mailto:contour-bedek@gmail.com" className="text-slate-300 hover:text-white">
                 <Mail className="h-5 w-5" />
                 <span className="sr-only">אימייל</span>
-              </Link>
-              <Link href="tel:0506427772" className="text-slate-300 hover:text-white">
-                <Phone className="h-5 w-5" />
-                <span className="sr-only">טלפון</span>
               </Link>
             </div>
           </div>
@@ -48,7 +48,7 @@ export default function Footer() {
                 גלריה
               </Link>
               <Link href="#contact" className="text-slate-300 hover:text-white">
-                צור קשר
+                צרו קשר
               </Link>
             </nav>
           </div>

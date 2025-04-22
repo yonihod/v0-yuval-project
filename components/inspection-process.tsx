@@ -23,39 +23,39 @@ export default function InspectionProcess() {
             </CardHeader>
             <CardContent className="grid grid-cols-1 md:grid-cols-2 gap-4 pt-4">
               <div className="flex items-start gap-3">
-                <CheckCircle className="h-5 w-5 text-blue-600 flex-shrink-0 mt-0.5" />
+                <CheckCircle className="h-5 w-5 text-brand-red flex-shrink-0 mt-0.5" />
                 <p className="text-sm">בדיקת שיפועים במקלחות ובמרפסת</p>
               </div>
               <div className="flex items-start gap-3">
-                <CheckCircle className="h-5 w-5 text-blue-600 flex-shrink-0 mt-0.5" />
+                <CheckCircle className="h-5 w-5 text-brand-red flex-shrink-0 mt-0.5" />
                 <p className="text-sm">בדיקת תקינות הריצוף (רובה, פגמים)</p>
               </div>
               <div className="flex items-start gap-3">
-                <CheckCircle className="h-5 w-5 text-blue-600 flex-shrink-0 mt-0.5" />
+                <CheckCircle className="h-5 w-5 text-brand-red flex-shrink-0 mt-0.5" />
                 <p className="text-sm">בדיקת מידות הדירה בלייזר והתאמה לתכניות</p>
               </div>
               <div className="flex items-start gap-3">
-                <CheckCircle className="h-5 w-5 text-blue-600 flex-shrink-0 mt-0.5" />
+                <CheckCircle className="h-5 w-5 text-brand-red flex-shrink-0 mt-0.5" />
                 <p className="text-sm">בדיקת אלומיניום - תקינות תריסים, גומיות, איטום בהיקף החלונות ומנגנון הפעלה</p>
               </div>
               <div className="flex items-start gap-3">
-                <CheckCircle className="h-5 w-5 text-blue-600 flex-shrink-0 mt-0.5" />
+                <CheckCircle className="h-5 w-5 text-brand-red flex-shrink-0 mt-0.5" />
                 <p className="text-sm">בדיקת מסגרות ומעקות</p>
               </div>
               <div className="flex items-start gap-3">
-                <CheckCircle className="h-5 w-5 text-blue-600 flex-shrink-0 mt-0.5" />
+                <CheckCircle className="h-5 w-5 text-brand-red flex-shrink-0 mt-0.5" />
                 <p className="text-sm">בדיקת נגרות - ארונות מטבח, ארונות אמבטיה ודלתות פנים</p>
               </div>
               <div className="flex items-start gap-3">
-                <CheckCircle className="h-5 w-5 text-blue-600 flex-shrink-0 mt-0.5" />
+                <CheckCircle className="h-5 w-5 text-brand-red flex-shrink-0 mt-0.5" />
                 <p className="text-sm">בדיקת ממ״ד - איטום, חלון ודלת</p>
               </div>
               <div className="flex items-start gap-3">
-                <CheckCircle className="h-5 w-5 text-blue-600 flex-shrink-0 mt-0.5" />
+                <CheckCircle className="h-5 w-5 text-brand-red flex-shrink-0 mt-0.5" />
                 <p className="text-sm">בדיקת סדקים וסטייה בקירות</p>
               </div>
               <div className="flex items-start gap-3">
-                <CheckCircle className="h-5 w-5 text-blue-600 flex-shrink-0 mt-0.5" />
+                <CheckCircle className="h-5 w-5 text-brand-red flex-shrink-0 mt-0.5" />
                 <p className="text-sm">ובדיקות נוספות בהתאם לדרישה</p>
               </div>
             </CardContent>
@@ -64,7 +64,7 @@ export default function InspectionProcess() {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-12">
             <Card>
               <CardHeader className="pb-2">
-                <Ruler className="h-10 w-10 text-blue-600 mb-2" />
+                <Ruler className="h-10 w-10 text-brand-red mb-2" />
                 <CardTitle className="text-lg">בדיקה מקצועית</CardTitle>
               </CardHeader>
               <CardContent>
@@ -75,7 +75,7 @@ export default function InspectionProcess() {
             </Card>
             <Card>
               <CardHeader className="pb-2">
-                <Search className="h-10 w-10 text-blue-600 mb-2" />
+                <Search className="h-10 w-10 text-brand-red mb-2" />
                 <CardTitle className="text-lg">איתור ליקויים</CardTitle>
               </CardHeader>
               <CardContent>
@@ -86,7 +86,7 @@ export default function InspectionProcess() {
             </Card>
             <Card>
               <CardHeader className="pb-2">
-                <FileText className="h-10 w-10 text-blue-600 mb-2" />
+                <FileText className="h-10 w-10 text-brand-red mb-2" />
                 <CardTitle className="text-lg">דוח מפורט</CardTitle>
               </CardHeader>
               <CardContent>

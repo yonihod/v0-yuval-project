@@ -9,24 +9,15 @@ export default function About() {
     <section id="about" className="py-16 md:py-24">
       <div className="container px-4 md:px-6">
         <div className="grid gap-6 lg:grid-cols-2 lg:gap-12 items-center">
-          <div className="relative">
-            <div className="relative mx-auto aspect-square max-w-md overflow-hidden rounded-xl">
+          <div className="mx-auto w-full max-w-[500px] lg:ml-0 relative">
+            <div className="aspect-[3/4] overflow-hidden rounded-xl max-w-[400px]">
               <Image
                 src="/engineer-portrait.jpg"
                 alt="יובל חודפי - מהנדס אזרחי"
                 fill
-                className="object-cover object-center"
+                className="object-cover object-[100%_35%] translate-x-[-5%]"
                 priority
               />
-            </div>
-            <div className="absolute -bottom-6 -right-6 rounded-lg bg-white p-4 shadow-lg">
-              <div className="flex items-center gap-2">
-                <div>
-                  <p className="text-sm font-medium">יובל חודפי</p>
-                  <p className="text-xs text-muted-foreground">מהנדס אזרחי</p>
-                </div>
-                <HardHat className="h-8 w-8 text-blue-600" />
-              </div>
             </div>
           </div>
           <div className="flex flex-col justify-center space-y-4">
@@ -44,7 +35,7 @@ export default function About() {
             <div className="grid grid-cols-2 gap-4 pt-4">
               <Card>
                 <CardContent className="p-4 flex items-center gap-2">
-                  <Award className="h-8 w-8 text-blue-600" />
+                  <Award className="h-8 w-8 text-brand-red" />
                   <div>
                     <h3 className="font-medium">ניסיון מקצועי</h3>
                     <p className="text-sm text-muted-foreground">שנים של מומחיות</p>
@@ -53,7 +44,7 @@ export default function About() {
               </Card>
               <Card>
                 <CardContent className="p-4 flex items-center gap-2">
-                  <FileCheck className="h-8 w-8 text-blue-600" />
+                  <FileCheck className="h-8 w-8 text-brand-red" />
                   <div>
                     <h3 className="font-medium">דוחות מפורטים</h3>
                     <p className="text-sm text-muted-foreground">קבילים בבית המשפט</p>
@@ -62,7 +53,7 @@ export default function About() {
               </Card>
               <Card>
                 <CardContent className="p-4 flex items-center gap-2">
-                  <Building className="h-8 w-8 text-blue-600" />
+                  <Building className="h-8 w-8 text-brand-red" />
                   <div>
                     <h3 className="font-medium">ידע הנדסי</h3>
                     <p className="text-sm text-muted-foreground">הבנה מעמיקה</p>
@@ -71,7 +62,7 @@ export default function About() {
               </Card>
               <Card>
                 <CardContent className="p-4 flex items-center gap-2">
-                  <CheckCircle className="h-8 w-8 text-blue-600" />
+                  <CheckCircle className="h-8 w-8 text-brand-red" />
                   <div>
                     <h3 className="font-medium">ליווי מלא</h3>
                     <p className="text-sm text-muted-foreground">לאורך כל התהליך</p>

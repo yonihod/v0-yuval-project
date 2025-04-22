@@ -3,7 +3,7 @@
 import { useState } from "react"
 import Link from "next/link"
 import Image from "next/image"
-import { Menu, X } from "lucide-react"
+import { Menu, X, Phone } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { cn } from "@/lib/utils"
 
@@ -31,10 +31,13 @@ export default function Navbar() {
             גלריה
           </Link>
           <Link href="#contact" className="text-sm font-medium transition-colors hover:text-primary">
-            צור קשר
+            צרו קשר
           </Link>
           <Button asChild>
-            <Link href="tel:0506427772">התקשר עכשיו</Link>
+            <Link href="https://wa.me/972506427772">
+              <Phone className="h-5 w-5 ml-1" />
+              צרו קשר בוואטסאפ
+            </Link>
           </Button>
         </nav>
 
@@ -78,10 +81,13 @@ export default function Navbar() {
             className="text-lg font-medium transition-colors hover:text-primary"
             onClick={() => setIsMenuOpen(false)}
           >
-            צור קשר
+            צרו קשר
           </Link>
           <Button asChild className="mt-4">
-            <Link href="tel:0506427772">התקשר עכשיו</Link>
+            <Link href="https://wa.me/972506427772">
+              <Phone className="h-5 w-5 ml-1" />
+              צרו קשר בוואטסאפ
+            </Link>
           </Button>
         </div>
       </div>
