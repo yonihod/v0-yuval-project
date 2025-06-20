@@ -9,14 +9,14 @@ import { Button } from "@/components/ui/button"
 
 const galleryImages = [
   {
-    src: "/gallery/inspection-1.jpg",
-    alt: "בדיקת אינסטלציה",
+    src: "/gallery/yellow-cable.jpg",
+    alt: "בדיקת מערכות ניקוז עם כבל צהוב",
     title: "בדיקת מערכות ניקוז",
   },
   {
     src: "/gallery/inspection-2.jpg",
     alt: "בדיקת מפלס דלת",
-    title: "בדיקת מפלס וישור דלתות",
+    title: "בדיקת הפרשי גובה מפני ריצוף לממ\"ד",
   },
   {
     src: "/gallery/inspection-3.jpg",
@@ -26,17 +26,17 @@ const galleryImages = [
   {
     src: "/gallery/inspection-4.jpg",
     alt: "בדיקה עם לייזר",
-    title: "בדיקת ישרות קירות בלייזר",
+    title: "בדיקת פילוס דלת כניסה באמצעות מאזנת לייזר",
   },
   {
-    src: "/gallery/inspection-5.jpg",
-    alt: "איתור נזילות ורטיבות",
+    src: "/gallery/toilet-level.jpg",
+    alt: "בדיקת מערכות אינסטלציה עם פלס על אסלה",
     title: "בדיקת מערכות אינסטלציה",
   },
   {
-    src: "/gallery/inspection-1.jpg",
-    alt: "בדיקת איכות ריצוף",
-    title: "בדיקת איכות ריצוף וניקוז",
+    src: "/gallery/ceramic-tiles.jpg",
+    alt: "בדיקת פגיעות באריחי קרמיקה",
+    title: "בדיקת פגיעות באריחי קרמיקה",
   },
 ]
 

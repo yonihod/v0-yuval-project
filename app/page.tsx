@@ -1,4 +1,3 @@
-import Hero from "@/components/hero"
 import About from "@/components/about"
 import Services from "@/components/services"
 import InspectionProcess from "@/components/inspection-process"
@@ -10,21 +9,24 @@ import Navbar from "@/components/navbar"
 import Testimonials from "@/components/testimonials"
 // Import the FAQ component
 import FAQ from "@/components/faq"
+import { VideoGallery } from "@/components/video-gallery"
 
 // Update the Home component to include Testimonials
 export default function Home() {
   return (
-    <main className="flex min-h-screen flex-col">
+    <div className="flex flex-col min-h-screen">
       <Navbar />
-      <Hero />
-      <About />
-      <Services />
-      <InspectionProcess />
-      <Gallery />
-      <Testimonials />
-      <FAQ />
-      <Contact />
+      <main className="flex-1">
+        <VideoGallery />
+        <About />
+        <Services />
+        <InspectionProcess />
+        <Gallery />
+        <Testimonials />
+        <FAQ />
+        <Contact />
+      </main>
       <Footer />
-    </main>
+    </div>
   )
 }

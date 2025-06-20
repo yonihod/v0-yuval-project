@@ -2,6 +2,7 @@
 
 import { useState } from "react"
 import { Droplet, Grid, CheckSquare, Lightbulb, ShieldCheck, Home } from "lucide-react"
+import { useIsMobile } from "@/hooks/use-mobile"
 
 const services = [
   {
@@ -49,6 +50,40 @@ const services = [
 
 export default function Services() {
   const [activeService, setActiveService] = useState<number | null>(null)
+  const [isExiting, setIsExiting] = useState<number | null>(null)
+  const isMobile = useIsMobile()
+
+  const handleMouseEnter = (index: number) => {
+    if (!isMobile) {
+      setIsExiting(null)
+      setActiveService(index)
+    }
+  }
+
+  const handleMouseLeave = () => {
+    if (!isMobile) {
+      setIsExiting(activeService)
+      setTimeout(() => {
+        setActiveService(null)
+        setIsExiting(null)
+      }, 300) // Match animation duration
+    }
+  }
+
+  const handleClick = (index: number) => {
+    if (isMobile) {
+      if (activeService === index) {
+        setIsExiting(index)
+        setTimeout(() => {
+          setActiveService(null)
+          setIsExiting(null)
+        }, 300)
+      } else {
+        setIsExiting(null)
+        setActiveService(index)
+      }
+    }
+  }
 
   return (
     <section id="services" className="py-16 md:py-24 bg-slate-50">
@@ -64,25 +99,42 @@ export default function Services() {
 
         <div className="grid grid-cols-2 md:grid-cols-3 gap-8 mt-12 max-w-5xl mx-auto">
           {services.map((service, index) => (
-            <div key={index} className="flex flex-col items-center text-center">
+            <div
+              key={index}
+              className="relative flex flex-col items-center text-center md:pb-2"
+              onMouseEnter={() => handleMouseEnter(index)}
+              onMouseLeave={handleMouseLeave}
+            >
               <button
-                onClick={() => setActiveService(activeService === index ? null : index)}
+                onClick={() => handleClick(index)}
                 className={`relative w-32 h-32 rounded-full transition-all duration-300 ${
-                  activeService === index 
-                  ? 'bg-brand-red shadow-lg scale-110' 
-                  : 'bg-white shadow-md hover:shadow-lg hover:scale-105'
+                  activeService === index
+                    ? "bg-brand-red shadow-lg scale-110"
+                    : "bg-white shadow-md hover:shadow-lg hover:scale-105"
                 }`}
               >
-                <div className={`absolute inset-0 flex items-center justify-center transition-colors ${
-                  activeService === index ? 'text-white' : 'text-brand-red'
-                }`}>
+                <div
+                  className={`absolute inset-0 flex items-center justify-center transition-colors ${
+                    activeService === index ? "text-white" : "text-brand-red"
+                  }`}
+                >
                   {service.icon}
                 </div>
               </button>
               <h3 className="mt-4 font-medium">{service.title}</h3>
               <p className="text-sm text-muted-foreground">{service.description}</p>
-              {activeService === index && (
-                <div className="mt-4 bg-white rounded-lg shadow-lg p-4 text-right">
+              {(activeService === index || isExiting === index) && (
+                <div
+                  className={`bg-white rounded-lg shadow-lg p-4 text-right ${
+                    isMobile
+                      ? "mt-4 w-full"
+                      : "absolute top-full w-64 z-10"
+                  } ${
+                    isExiting === index
+                      ? "animate-out fade-out duration-300"
+                      : "animate-in fade-in duration-300"
+                  }`}
+                >
                   {service.details.map((detail, i) => (
                     <p key={i} className="text-sm mb-2">{detail}</p>
                   ))}

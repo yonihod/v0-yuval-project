@@ -48,7 +48,7 @@ export default function InspectionProcess() {
               </div>
               <div className="flex items-start gap-3">
                 <CheckCircle className="h-5 w-5 text-brand-red flex-shrink-0 mt-0.5" />
-                <p className="text-sm">בדיקת ממ״ד - איטום, חלון ודלת</p>
+                <p className="text-sm">בדיקת ממ"ד</p>
               </div>
               <div className="flex items-start gap-3">
                 <CheckCircle className="h-5 w-5 text-brand-red flex-shrink-0 mt-0.5" />
