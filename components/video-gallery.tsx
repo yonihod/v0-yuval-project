@@ -4,13 +4,14 @@ import * as React from "react"
 import { useIsMobile } from "@/hooks/use-mobile"
 import { Volume2, VolumeX, Play, Pause } from "lucide-react"
 
-const videos = [
-  { name: "יובל חודפי - בדק בית 14.mp4" },
-  { name: "יובל חודפי - בדק בית 13.mp4" },
-  { name: "יובל חודפי - בדק בית 07 - אחרי תיקון.mp4" },
-  { name: "יובל חודפי - בדק בית 05.mp4" },
-  { name: "יובל חודפי - בדק בית 01.mp4" },
-]
+type Video = {
+  name: string;
+  url: string;
+};
+
+interface VideoGalleryProps {
+  videos: Video[];
+}
 
 /*
 // Future YouTube integration
@@ -26,7 +27,7 @@ const youtubeVideos = [
 ]
 */
 
-export function VideoGallery() {
+export function VideoGallery({ videos }: VideoGalleryProps) {
   const [current, setCurrent] = React.useState(0)
   const [isMuted, setIsMuted] = React.useState(true)
   const [isPlaying, setIsPlaying] = React.useState(true)
@@ -37,14 +38,11 @@ export function VideoGallery() {
   React.useEffect(() => {
     const videoElement = videoRef.current
     const bgVideoElement = bgVideoRef.current
-    if (!videoElement || !bgVideoElement) return
+    if (!videoElement || !bgVideoElement || videos.length === 0) return
 
-    const newSrc = `/videos/published/${encodeURIComponent(videos[current].name)}`
+    const newSrc = videos[current].url
     
-    // Safely get the path, default to empty string if no src exists yet
-    const currentPath = videoElement.src ? new URL(videoElement.src).pathname : ""
-    
-    if (currentPath !== newSrc) {
+    if (videoElement.src !== newSrc) {
       videoElement.src = newSrc
       bgVideoElement.src = newSrc
       videoElement.load()
@@ -68,29 +66,30 @@ export function VideoGallery() {
     }
     videoElement.addEventListener("ended", handleVideoEnded)
     return () => videoElement.removeEventListener("ended", handleVideoEnded)
-  }, [current, isPlaying])
+  }, [current, isPlaying, videos])
 
   React.useEffect(() => {
+    if (videos.length === 0) return;
     const nextVideoIndex = (current + 1) % videos.length
     const prevVideoIndex = (current - 1 + videos.length) % videos.length
 
     const preloadLinkNext = document.createElement("link")
     preloadLinkNext.rel = "preload"
     preloadLinkNext.as = "video"
-    preloadLinkNext.href = `/videos/published/${encodeURIComponent(videos[nextVideoIndex].name)}`
+    preloadLinkNext.href = videos[nextVideoIndex].url
     document.head.appendChild(preloadLinkNext)
 
     const preloadLinkPrev = document.createElement("link")
     preloadLinkPrev.rel = "preload"
     preloadLinkPrev.as = "video"
-    preloadLinkPrev.href = `/videos/published/${encodeURIComponent(videos[prevVideoIndex].name)}`
+    preloadLinkPrev.href = videos[prevVideoIndex].url
     document.head.appendChild(preloadLinkPrev)
 
     return () => {
       document.head.removeChild(preloadLinkNext)
       document.head.removeChild(preloadLinkPrev)
     }
-  }, [current])
+  }, [current, videos])
 
   const handleThumbnailInteraction = (index: number) => {
     if (current !== index) {
@@ -104,6 +103,14 @@ export function VideoGallery() {
 
   const toggleMute = () => setIsMuted(prev => !prev)
   const togglePlay = () => setIsPlaying(prev => !prev)
+  
+  if (videos.length === 0) {
+    return (
+      <section className="relative w-full h-[600px] overflow-hidden bg-black flex items-center justify-center">
+        <p className="text-white">No videos found.</p>
+      </section>
+    );
+  }
 
   return (
     <section className="relative w-full h-[600px] overflow-hidden bg-black">
@@ -165,7 +172,7 @@ export function VideoGallery() {
                   playsInline
                 >
                   <source
-                    src={`/videos/published/${encodeURIComponent(video.name)}`}
+                    src={video.url}
                     type="video/mp4"
                   />
                 </video>
