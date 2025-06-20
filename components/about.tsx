@@ -8,30 +8,20 @@ export default function About() {
   return (
     <section id="about" className="py-16 md:py-24">
       <div className="container px-4 md:px-6">
-        <div className="grid gap-6 lg:grid-cols-2 lg:gap-12 items-center">
-          <div className="mx-auto w-full max-w-[500px] lg:ml-0 relative">
-            <div className="aspect-[3/4] overflow-hidden rounded-xl max-w-[400px]">
-              <Image
-                src="/engineer-portrait.jpg"
-                alt="יובל חודפי - מהנדס אזרחי"
-                fill
-                className="object-cover md:object-[100%_35%] md:translate-x-[-5%]"
-                priority
-              />
-            </div>
-          </div>
-          <div className="flex flex-col justify-center space-y-4">
-            <div className="space-y-2">
-              <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl text-right">אודות</h2>
-              <p className="text-muted-foreground md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed text-right">
-                שלום! אני יובל חודפי, מהנדס אזרחי עם ניסיון רב בבדיקת ליקויי בנייה והכנת דוחות הנדסיים מפורטים. המטרה
-                שלי היא להגן עליכם מפני ליקויים נסתרים שעלולים לעלות לכם ביוקר בעתיד.
-              </p>
-              <p className="text-muted-foreground md:text-lg/relaxed lg:text-base/relaxed xl:text-lg/relaxed text-right mt-2">
-                מטרת הבדיקה – להעניק ללקוח תמונת מצב מקצועית וברורה על מצב הדירה, כולל איתור ליקויים ומתן המלצות לטיפול,
-                כדי לאפשר התנהלות מושכלת מול הקבלן ולוודא שהדירה תימסר במצב תקין ובאיכות הנדרשת.
-              </p>
-            </div>
+        <div className="grid gap-10 lg:grid-cols-2 lg:gap-16">
+          <div className="space-y-4">
+            <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl">אודותינו</h2>
+            <p className="text-muted-foreground">
+              אנו מתחייבים למתן שירות מקצועי, אמין ובלתי תלוי, תוך שימוש בטכנולוגיות המתקדמות ביותר לאיתור ליקויים.
+            </p>
+            <p className="text-muted-foreground md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed text-right">
+              שלום! אני יובל חודפי, מהנדס אזרחי עם ניסיון רב בבדיקת ליקויי בנייה והכנת דוחות הנדסיים מפורטים. המטרה
+              שלי היא להגן עליכם מפני ליקויים נסתרים שעלולים לעלות לכם ביוקר בעתיד.
+            </p>
+            <p className="text-muted-foreground md:text-lg/relaxed lg:text-base/relaxed xl:text-lg/relaxed text-right mt-2">
+              מטרת הבדיקה – להעניק ללקוח תמונת מצב מקצועית וברורה על מצב הדירה, כולל איתור ליקויים ומתן המלצות לטיפול,
+              כדי לאפשר התנהלות מושכלת מול הקבלן ולוודא שהדירה תימסר במצב תקין ובאיכות הנדרשת.
+            </p>
             <div className="grid grid-cols-2 gap-4 pt-4">
               <Card>
                 <CardContent className="p-4 flex items-center gap-2">
@@ -78,6 +68,15 @@ export default function About() {
                 </Link>
               </Button>
             </div>
+          </div>
+          <div className="relative h-[400px] w-full">
+            <Image
+              src="/engineer-portrait.jpg"
+              alt="יובל חודפי - מהנדס אזרחי"
+              fill
+              className="object-cover md:object-[100%_35%] md:translate-x-[-5%]"
+              priority
+            />
           </div>
         </div>
       </div>

@@ -61,11 +61,11 @@ export default function Footer() {
               </p>
               <p className="flex items-center gap-2 text-slate-300">
                 <Mail className="h-4 w-4 flex-shrink-0" />
-                <span>contour-bedek@gmail.com</span>
+                <span>contour.bedek@gmail.com</span>
               </p>
               <p className="flex items-center gap-2 text-slate-300">
                 <span className="flex-shrink-0">📍</span>
-                <span>הטייסים 4, נס ציונה, ישראל</span>
+                <span>נס ציונה, ישראל</span>
               </p>
             </div>
           </div>

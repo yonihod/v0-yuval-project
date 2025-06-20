@@ -5,11 +5,11 @@ import { useIsMobile } from "@/hooks/use-mobile"
 import { Volume2, VolumeX, Play, Pause } from "lucide-react"
 
 const videos = [
-  "יובל חודפי - בדק בית 14.mp4",
-  "יובל חודפי - בדק בית 13.mp4",
-  "יובל חודפי - בדק בית 07 - אחרי תיקון.mp4",
-  "יובל חודפי - בדק בית 05.mp4",
-  "יובל חודפי - בדק בית 01.mp4",
+  { name: "יובל חודפי - בדק בית 14.mp4" },
+  { name: "יובל חודפי - בדק בית 13.mp4" },
+  { name: "יובל חודפי - בדק בית 07 - אחרי תיקון.mp4" },
+  { name: "יובל חודפי - בדק בית 05.mp4" },
+  { name: "יובל חודפי - בדק בית 01.mp4" },
 ]
 
 /*
@@ -39,9 +39,12 @@ export function VideoGallery() {
     const bgVideoElement = bgVideoRef.current
     if (!videoElement || !bgVideoElement) return
 
-    const newSrc = `/videos/published/${encodeURIComponent(videos[current])}`
-
-    if (videoElement.src !== window.location.origin + newSrc) {
+    const newSrc = `/videos/published/${encodeURIComponent(videos[current].name)}`
+    
+    // Safely get the path, default to empty string if no src exists yet
+    const currentPath = videoElement.src ? new URL(videoElement.src).pathname : ""
+    
+    if (currentPath !== newSrc) {
       videoElement.src = newSrc
       bgVideoElement.src = newSrc
       videoElement.load()
@@ -74,13 +77,13 @@ export function VideoGallery() {
     const preloadLinkNext = document.createElement("link")
     preloadLinkNext.rel = "preload"
     preloadLinkNext.as = "video"
-    preloadLinkNext.href = `/videos/published/${encodeURIComponent(videos[nextVideoIndex])}`
+    preloadLinkNext.href = `/videos/published/${encodeURIComponent(videos[nextVideoIndex].name)}`
     document.head.appendChild(preloadLinkNext)
 
     const preloadLinkPrev = document.createElement("link")
     preloadLinkPrev.rel = "preload"
     preloadLinkPrev.as = "video"
-    preloadLinkPrev.href = `/videos/published/${encodeURIComponent(videos[prevVideoIndex])}`
+    preloadLinkPrev.href = `/videos/published/${encodeURIComponent(videos[prevVideoIndex].name)}`
     document.head.appendChild(preloadLinkPrev)
 
     return () => {
@@ -92,7 +95,10 @@ export function VideoGallery() {
   const handleThumbnailInteraction = (index: number) => {
     if (current !== index) {
       setCurrent(index)
-      setIsPlaying(true)
+    }
+    setIsPlaying(true)
+    if (isMobile) {
+      setIsMuted(false)
     }
   }
 
@@ -138,31 +144,35 @@ export function VideoGallery() {
           )}
         </button>
       </div>
-      <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex space-x-2 p-2 bg-black/20 rounded-lg backdrop-blur-sm z-20">
-        {videos.map((video, index) => (
-          <div
-            key={`thumb-${index}`}
-            className={`w-24 h-14 rounded-md cursor-pointer overflow-hidden transition-all duration-300 ${
-              index === current
-                ? "ring-4 ring-white shadow-lg"
-                : "opacity-70 hover:opacity-100"
-            }`}
-            onMouseEnter={() => !isMobile && handleThumbnailInteraction(index)}
-            onClick={() => handleThumbnailInteraction(index)}
-          >
-            <video
-              className="w-full h-full object-cover"
-              preload="metadata"
-              muted
-              playsInline
-            >
-              <source
-                src={`/videos/published/${encodeURIComponent(video)}`}
-                type="video/mp4"
-              />
-            </video>
-          </div>
-        ))}
+      <div className="absolute inset-x-0 bottom-4 z-20 px-4">
+        <div className="w-full overflow-x-auto pb-2 no-scrollbar">
+            <div className="mx-auto flex w-max space-x-2 rounded-lg bg-black/20 p-2 backdrop-blur-sm">
+            {videos.map((video, index) => (
+              <div
+                key={`thumb-${index}`}
+                className={`w-24 h-14 rounded-md cursor-pointer overflow-hidden transition-all duration-300 flex-shrink-0 ${
+                  index === current
+                    ? "ring-4 ring-white shadow-lg"
+                    : "opacity-70 hover:opacity-100"
+                }`}
+                onMouseEnter={() => !isMobile && handleThumbnailInteraction(index)}
+                onClick={() => handleThumbnailInteraction(index)}
+              >
+                <video
+                  className="w-full h-full object-cover"
+                  preload="metadata"
+                  muted
+                  playsInline
+                >
+                  <source
+                    src={`/videos/published/${encodeURIComponent(video.name)}`}
+                    type="video/mp4"
+                  />
+                </video>
+              </div>
+            ))}
+            </div>
+        </div>
       </div>
     </section>
   )

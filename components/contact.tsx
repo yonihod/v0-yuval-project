@@ -77,7 +77,7 @@ export default function Contact() {
                   <MapPin className="h-5 w-5 text-brand-red" />
                   <div>
                     <p className="font-medium">כתובת</p>
-                    <p className="text-sm text-muted-foreground">הטייסים 4, נס ציונה, ישראל</p>
+                    <p className="text-sm text-muted-foreground"> נס ציונה, ישראל</p>
                   </div>
                 </div>
                 <div className="flex items-center gap-3">
@@ -93,8 +93,8 @@ export default function Contact() {
                   <Mail className="h-5 w-5 text-brand-red" />
                   <div>
                     <p className="font-medium">אימייל</p>
-                    <Link href="mailto:contour-bedek@gmail.com" className="text-sm text-brand-red hover:text-red-700 hover:underline">
-                      contour-bedek@gmail.com
+                    <Link href="mailto:contour.bedek@gmail.com" className="text-sm text-brand-red hover:text-red-700 hover:underline">
+                      contour.bedek@gmail.com
                     </Link>
                   </div>
                 </div>
