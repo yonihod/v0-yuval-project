@@ -31,37 +31,55 @@ export function VideoGallery() {
   const [isMuted, setIsMuted] = React.useState(true)
   const [isPlaying, setIsPlaying] = React.useState(true)
   const videoRef = React.useRef<HTMLVideoElement>(null)
+  const bgVideoRef = React.useRef<HTMLVideoElement>(null)
   const isMobile = useIsMobile()
 
   React.useEffect(() => {
     const videoElement = videoRef.current
-    if (!videoElement) return
+    const bgVideoElement = bgVideoRef.current
+    if (!videoElement || !bgVideoElement) return
 
-    isPlaying ? videoElement.play() : videoElement.pause()
+    const newSrc = `/videos/published/${encodeURIComponent(videos[current])}`
+
+    if (videoElement.src !== window.location.origin + newSrc) {
+      videoElement.src = newSrc
+      bgVideoElement.src = newSrc
+      videoElement.load()
+      bgVideoElement.load()
+    }
+
+    if (isPlaying) {
+      videoElement.play().catch(() => {})
+      bgVideoElement.play().catch(() => {})
+    } else {
+      videoElement.pause()
+      bgVideoElement.pause()
+    }
+
+    videoElement.classList.remove("animate-in", "fade-in")
+    void videoElement.offsetWidth
+    videoElement.classList.add("animate-in", "fade-in")
 
     const handleVideoEnded = () => {
       setCurrent(prev => (prev + 1) % videos.length)
     }
-
     videoElement.addEventListener("ended", handleVideoEnded)
-    return () => {
-      videoElement.removeEventListener("ended", handleVideoEnded)
-    }
+    return () => videoElement.removeEventListener("ended", handleVideoEnded)
   }, [current, isPlaying])
 
   React.useEffect(() => {
     const nextVideoIndex = (current + 1) % videos.length
     const prevVideoIndex = (current - 1 + videos.length) % videos.length
-    
-    const preloadLinkNext = document.createElement('link')
-    preloadLinkNext.rel = 'preload'
-    preloadLinkNext.as = 'video'
+
+    const preloadLinkNext = document.createElement("link")
+    preloadLinkNext.rel = "preload"
+    preloadLinkNext.as = "video"
     preloadLinkNext.href = `/videos/published/${encodeURIComponent(videos[nextVideoIndex])}`
     document.head.appendChild(preloadLinkNext)
 
-    const preloadLinkPrev = document.createElement('link')
-    preloadLinkPrev.rel = 'preload'
-    preloadLinkPrev.as = 'video'
+    const preloadLinkPrev = document.createElement("link")
+    preloadLinkPrev.rel = "preload"
+    preloadLinkPrev.as = "video"
     preloadLinkPrev.href = `/videos/published/${encodeURIComponent(videos[prevVideoIndex])}`
     document.head.appendChild(preloadLinkPrev)
 
@@ -72,54 +90,42 @@ export function VideoGallery() {
   }, [current])
 
   const handleThumbnailInteraction = (index: number) => {
-    setCurrent(index)
-    setIsPlaying(true)
+    if (current !== index) {
+      setCurrent(index)
+      setIsPlaying(true)
+    }
   }
 
-  const toggleMute = () => {
-    setIsMuted(prev => !prev)
-  }
-
-  const togglePlay = () => {
-    setIsPlaying(prev => !prev)
-  }
+  const toggleMute = () => setIsMuted(prev => !prev)
+  const togglePlay = () => setIsPlaying(prev => !prev)
 
   return (
     <section className="relative w-full h-[600px] overflow-hidden bg-black">
       <video
-        key={`bg-${current}`}
+        ref={bgVideoRef}
         className="absolute inset-0 w-full h-full object-cover filter blur-2xl brightness-50"
-        autoPlay
         loop
         muted
         playsInline
-      >
-        <source
-          src={`/videos/published/${encodeURIComponent(videos[current])}`}
-          type="video/mp4"
-        />
-      </video>
+      />
       <video
         ref={videoRef}
-        key={current}
-        className="relative z-10 w-full h-full object-contain animate-in fade-in duration-500"
-        autoPlay
+        className="relative z-10 w-full h-full object-contain duration-500"
         muted={isMuted}
         playsInline
         onPlay={() => setIsPlaying(true)}
         onPause={() => setIsPlaying(false)}
-      >
-        <source
-          src={`/videos/published/${encodeURIComponent(videos[current])}`}
-          type="video/mp4"
-        />
-      </video>
+      />
       <div className="absolute top-4 right-4 z-20 flex items-center space-x-2">
         <button
           onClick={togglePlay}
           className="text-white bg-black/30 p-2 rounded-full hover:bg-black/50 transition-colors"
         >
-          {isPlaying ? <Pause className="h-6 w-6" /> : <Play className="h-6 w-6" />}
+          {isPlaying ? (
+            <Pause className="h-6 w-6" />
+          ) : (
+            <Play className="h-6 w-6" />
+          )}
         </button>
         <button
           onClick={toggleMute}
