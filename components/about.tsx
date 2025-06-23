@@ -11,16 +11,9 @@ export default function About() {
         <div className="grid gap-10 lg:grid-cols-2 lg:gap-16">
           <div className="space-y-4">
             <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl">אודותינו</h2>
-            <p className="text-muted-foreground">
-              אנו מתחייבים למתן שירות מקצועי, אמין ובלתי תלוי, תוך שימוש בטכנולוגיות המתקדמות ביותר לאיתור ליקויים.
-            </p>
             <p className="text-muted-foreground md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed text-right">
               שלום! אני יובל חודפי, מהנדס אזרחי עם ניסיון רב בבדיקת ליקויי בנייה והכנת דוחות הנדסיים מפורטים. המטרה
               שלי היא להגן עליכם מפני ליקויים נסתרים שעלולים לעלות לכם ביוקר בעתיד.
-            </p>
-            <p className="text-muted-foreground md:text-lg/relaxed lg:text-base/relaxed xl:text-lg/relaxed text-right mt-2">
-              מטרת הבדיקה – להעניק ללקוח תמונת מצב מקצועית וברורה על מצב הדירה, כולל איתור ליקויים ומתן המלצות לטיפול,
-              כדי לאפשר התנהלות מושכלת מול הקבלן ולוודא שהדירה תימסר במצב תקין ובאיכות הנדרשת.
             </p>
             <div className="grid grid-cols-2 gap-4 pt-4">
               <Card>
@@ -62,7 +55,7 @@ export default function About() {
             </div>
             <div className="flex justify-center mt-4">
               <Button asChild size="lg" className="gap-1">
-                <Link href="#contact">
+                <Link href="https://wa.me/972506427772?text=היי, אשמח להתייעץ בנוגע לבדק בית">
                   <CheckCircle className="h-5 w-5 ml-1" />
                   לחצו להתייעצות חינם
                 </Link>
