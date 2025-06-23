@@ -1,6 +1,6 @@
 "use client"
 
-import { useState } from "react"
+import { useState, useRef } from "react"
 import { Droplet, Grid, CheckSquare, Lightbulb, ShieldCheck, Home } from "lucide-react"
 import { useIsMobile } from "@/hooks/use-mobile"
 
@@ -52,36 +52,45 @@ export default function Services() {
   const [activeService, setActiveService] = useState<number | null>(null)
   const [isExiting, setIsExiting] = useState<number | null>(null)
   const isMobile = useIsMobile()
+  const timeoutRef = useRef<NodeJS.Timeout | null>(null)
 
-  const handleMouseEnter = (index: number) => {
-    if (!isMobile) {
-      setIsExiting(null)
-      setActiveService(index)
+  const clearExistingTimeout = () => {
+    if (timeoutRef.current) {
+      clearTimeout(timeoutRef.current)
+      timeoutRef.current = null
     }
   }
 
+  const handleMouseEnter = (index: number) => {
+    clearExistingTimeout()
+    setIsExiting(null)
+    setActiveService(index)
+  }
+
   const handleMouseLeave = () => {
-    if (!isMobile) {
+    if (!isMobile && activeService !== null) {
+      clearExistingTimeout()
       setIsExiting(activeService)
-      setTimeout(() => {
+      timeoutRef.current = setTimeout(() => {
         setActiveService(null)
         setIsExiting(null)
+        timeoutRef.current = null
       }, 300) // Match animation duration
     }
   }
 
   const handleClick = (index: number) => {
-    if (isMobile) {
-      if (activeService === index) {
-        setIsExiting(index)
-        setTimeout(() => {
-          setActiveService(null)
-          setIsExiting(null)
-        }, 300)
-      } else {
+    clearExistingTimeout()
+    if (activeService === index) {
+      setIsExiting(index)
+      timeoutRef.current = setTimeout(() => {
+        setActiveService(null)
         setIsExiting(null)
-        setActiveService(index)
-      }
+        timeoutRef.current = null
+      }, 300)
+    } else {
+      setIsExiting(null)
+      setActiveService(index)
     }
   }
 
