@@ -1,12 +1,12 @@
-"use client"
+"use client";
 
-import * as React from "react"
-import { useIsMobile } from "@/hooks/use-mobile"
-import { Volume2, VolumeX, Play, Pause } from "lucide-react"
+import * as React from "react";
+import { useIsMobile } from "@/hooks/use-mobile";
+import { Volume2, VolumeX, Play, Pause } from "lucide-react";
 
 type Video = {
-  name: string;
-  url: string;
+  id: string;
+  thumbnail: string;
 };
 
 interface VideoGalleryProps {
@@ -28,132 +28,128 @@ const youtubeVideos = [
 */
 
 export function VideoGallery({ videos }: VideoGalleryProps) {
-  const [current, setCurrent] = React.useState(0)
-  const [isMuted, setIsMuted] = React.useState(true)
-  const [isPlaying, setIsPlaying] = React.useState(true)
-  const videoRef = React.useRef<HTMLVideoElement>(null)
-  const bgVideoRef = React.useRef<HTMLVideoElement>(null)
-  const isMobile = useIsMobile()
-
-  React.useEffect(() => {
-    const videoElement = videoRef.current
-    const bgVideoElement = bgVideoRef.current
-    if (!videoElement || !bgVideoElement || videos.length === 0) return
-
-    const newSrc = videos[current].url
-    
-    if (videoElement.src !== newSrc) {
-      videoElement.src = newSrc
-      bgVideoElement.src = newSrc
-      videoElement.load()
-      bgVideoElement.load()
-    }
-
-    if (isPlaying) {
-      videoElement.play().catch(() => {})
-      bgVideoElement.play().catch(() => {})
-    } else {
-      videoElement.pause()
-      bgVideoElement.pause()
-    }
-
-    videoElement.classList.remove("animate-in", "fade-in")
-    void videoElement.offsetWidth
-    videoElement.classList.add("animate-in", "fade-in")
-
-    const handleVideoEnded = () => {
-      setCurrent(prev => (prev + 1) % videos.length)
-    }
-    videoElement.addEventListener("ended", handleVideoEnded)
-    return () => videoElement.removeEventListener("ended", handleVideoEnded)
-  }, [current, isPlaying, videos])
+  const [current, setCurrent] = React.useState(0);
+  const [isMuted, setIsMuted] = React.useState(true);
+  const [isPlaying, setIsPlaying] = React.useState(true);
+  const iframeRef = React.useRef<HTMLIFrameElement>(null);
+  const isMobile = useIsMobile();
 
   React.useEffect(() => {
     if (videos.length === 0) return;
-    const nextVideoIndex = (current + 1) % videos.length
-    const prevVideoIndex = (current - 1 + videos.length) % videos.length
 
-    const preloadLinkNext = document.createElement("link")
-    preloadLinkNext.rel = "preload"
-    preloadLinkNext.as = "video"
-    preloadLinkNext.href = videos[nextVideoIndex].url
-    document.head.appendChild(preloadLinkNext)
+    const iframe = iframeRef.current;
+    if (!iframe) return;
 
-    const preloadLinkPrev = document.createElement("link")
-    preloadLinkPrev.rel = "preload"
-    preloadLinkPrev.as = "video"
-    preloadLinkPrev.href = videos[prevVideoIndex].url
-    document.head.appendChild(preloadLinkPrev)
+    const currentVideo = videos[current];
+    const embedUrl = `https://www.youtube.com/embed/${
+      currentVideo.id
+    }?autoplay=${isPlaying ? 1 : 0}&mute=${isMuted ? 1 : 0}&loop=1&playlist=${
+      currentVideo.id
+    }&controls=0&showinfo=0&rel=0&modestbranding=1&iv_load_policy=3&fs=0&playsinline=1&enablejsapi=1&origin=${
+      window.location.origin
+    }&disablekb=1&color=white&cc_load_policy=0&hl=en`;
 
-    return () => {
-      document.head.removeChild(preloadLinkNext)
-      document.head.removeChild(preloadLinkPrev)
-    }
-  }, [current, videos])
+    iframe.src = embedUrl;
+
+    // Handle video end to loop back
+    const handleMessage = (event: MessageEvent) => {
+      if (event.origin !== "https://www.youtube.com") return;
+
+      try {
+        const data = JSON.parse(event.data);
+        if (data.event === "onStateChange" && data.info === 0) {
+          // Video ended, loop back to start
+          setCurrent(0);
+        }
+      } catch (e) {
+        // Ignore parsing errors
+      }
+    };
+
+    window.addEventListener("message", handleMessage);
+    return () => window.removeEventListener("message", handleMessage);
+  }, [current, isPlaying, isMuted, videos]);
 
   const handleThumbnailInteraction = (index: number) => {
     if (current !== index) {
-      setCurrent(index)
+      setCurrent(index);
     }
-    setIsPlaying(true)
+    setIsPlaying(true);
     if (isMobile) {
-      setIsMuted(false)
+      setIsMuted(false);
     }
-  }
+  };
 
-  const toggleMute = () => setIsMuted(prev => !prev)
-  const togglePlay = () => setIsPlaying(prev => !prev)
-  
+  const toggleMute = () => {
+    console.log("Toggle mute clicked");
+    setIsMuted((prev) => !prev);
+  };
+  const togglePlay = () => {
+    console.log("Toggle play clicked");
+    setIsPlaying((prev) => !prev);
+  };
+
   if (videos.length === 0) {
     return (
-      <section className="relative w-full h-[600px] overflow-hidden bg-black flex items-center justify-center">
+      <section className="relative flex justify-center items-center bg-black w-full h-[600px] overflow-hidden">
         <p className="text-white">No videos found.</p>
       </section>
     );
   }
 
   return (
-    <section className="relative w-full h-[600px] overflow-hidden bg-black">
-      <video
-        ref={bgVideoRef}
-        className="absolute inset-0 w-full h-full object-cover filter blur-2xl brightness-50"
-        loop
-        muted
-        playsInline
-      />
-      <video
-        ref={videoRef}
-        className="relative z-10 w-full h-full object-contain duration-500"
-        muted={isMuted}
-        playsInline
-        onPlay={() => setIsPlaying(true)}
-        onPause={() => setIsPlaying(false)}
-      />
-      <div className="absolute top-4 right-4 z-20 flex items-center space-x-2">
-        <button
-          onClick={togglePlay}
-          className="text-white bg-black/30 p-2 rounded-full hover:bg-black/50 transition-colors"
-        >
-          {isPlaying ? (
-            <Pause className="h-6 w-6" />
-          ) : (
-            <Play className="h-6 w-6" />
-          )}
-        </button>
-        <button
-          onClick={toggleMute}
-          className="text-white bg-black/30 p-2 rounded-full hover:bg-black/50 transition-colors"
-        >
-          {isMuted ? (
-            <VolumeX className="h-6 w-6" />
-          ) : (
-            <Volume2 className="h-6 w-6" />
-          )}
-        </button>
+    <section className="relative bg-black w-full h-[600px] overflow-hidden">
+      {/* Background blur effect */}
+      <div className="absolute inset-0 blur-2xl brightness-50 w-full h-full filter">
+        <img
+          src={videos[current].thumbnail}
+          alt="Background"
+          className="w-full h-full object-cover"
+        />
       </div>
-      <div className="absolute inset-x-0 bottom-4 z-20 px-4">
-        <div className="w-full overflow-x-auto pb-2 no-scrollbar">
-            <div className="mx-auto flex w-max space-x-2 rounded-lg bg-black/20 p-2 backdrop-blur-sm">
+
+      {/* Main video iframe */}
+      <iframe
+        ref={iframeRef}
+        className="z-10 relative w-full h-full object-contain duration-500"
+        frameBorder="0"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+        allowFullScreen
+      />
+
+      {/* Thumbnail gallery */}
+      <div
+        className="bottom-4 z-[9999] absolute inset-x-0 px-4"
+        style={{ isolation: "isolate" }}
+      >
+        {/* Controls */}
+        <div
+          className="bottom-4 left-4 z-20 absolute flex items-center space-x-2"
+          style={{ isolation: "isolate" }}
+        >
+          <button
+            onClick={togglePlay}
+            className="z-10 relative bg-black/50 hover:bg-black/70 shadow-lg p-3 rounded-full text-white transition-colors"
+          >
+            {isPlaying ? (
+              <Pause className="w-6 h-6" />
+            ) : (
+              <Play className="w-6 h-6" />
+            )}
+          </button>
+          <button
+            onClick={toggleMute}
+            className="z-10 relative bg-black/50 hover:bg-black/70 shadow-lg p-3 rounded-full text-white transition-colors"
+          >
+            {isMuted ? (
+              <VolumeX className="w-6 h-6" />
+            ) : (
+              <Volume2 className="w-6 h-6" />
+            )}
+          </button>
+        </div>
+        <div className="pb-2 w-full overflow-x-auto no-scrollbar">
+          <div className="flex space-x-2 bg-black/20 backdrop-blur-sm mx-auto p-2 rounded-lg w-max">
             {videos.map((video, index) => (
               <div
                 key={`thumb-${index}`}
@@ -162,25 +158,21 @@ export function VideoGallery({ videos }: VideoGalleryProps) {
                     ? "ring-4 ring-white shadow-lg"
                     : "opacity-70 hover:opacity-100"
                 }`}
-                onMouseEnter={() => !isMobile && handleThumbnailInteraction(index)}
+                onMouseEnter={() =>
+                  !isMobile && handleThumbnailInteraction(index)
+                }
                 onClick={() => handleThumbnailInteraction(index)}
               >
-                <video
+                <img
+                  src={video.thumbnail}
+                  alt={`Video ${index + 1}`}
                   className="w-full h-full object-cover"
-                  preload="metadata"
-                  muted
-                  playsInline
-                >
-                  <source
-                    src={video.url}
-                    type="video/mp4"
-                  />
-                </video>
+                />
               </div>
             ))}
-            </div>
+          </div>
         </div>
       </div>
     </section>
-  )
-} 
+  );
+}
