@@ -10,11 +10,17 @@ import Testimonials from "@/components/testimonials";
 // Import the FAQ component
 import FAQ from "@/components/faq";
 import { VideoGallery } from "@/components/video-gallery";
+import { AccessibilityAudit } from "@/components/accessibility-audit";
+import { AccessibilityWidget } from "@/components/accessibility-widget";
 
 // Update the Home component to include Testimonials
 export default function Home() {
   // YouTube video IDs extracted from the provided URLs
   const videos = [
+    {
+      id: "pKFX5YwVzPc",
+      thumbnail: "https://img.youtube.com/vi/pKFX5YwVzPc/maxresdefault.jpg",
+    },
     {
       id: "5cSeBEZL46I",
       thumbnail: "https://img.youtube.com/vi/5cSeBEZL46I/maxresdefault.jpg",
@@ -40,7 +46,7 @@ export default function Home() {
   return (
     <div className="flex flex-col min-h-screen">
       <Navbar />
-      <main className="flex-1">
+      <main className="flex-1" id="main-content" role="main">
         <VideoGallery videos={videos} />
         <About />
         <Services />
@@ -51,6 +57,10 @@ export default function Home() {
         <Contact />
       </main>
       <Footer />
+      {/* Keep audit tool for development only */}
+      {process.env.NODE_ENV === 'development' && <AccessibilityAudit />}
+      {/* Production accessibility widget */}
+      <AccessibilityWidget />
     </div>
   );
 }

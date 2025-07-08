@@ -3,99 +3,77 @@ import { CheckCircle, Ruler, Search, FileText } from "lucide-react"
 
 export default function InspectionProcess() {
   return (
-    <section className="py-16 md:py-24 bg-gradient-to-b from-white to-slate-50">
+    <section 
+      className="py-16 md:py-24 bg-gradient-to-b from-white to-slate-50"
+      role="region"
+      aria-label="תהליך הבדיקה"
+    >
       <div className="container px-4 md:px-6">
-        <div className="flex flex-col items-center justify-center space-y-4 text-center">
+        <header className="flex flex-col items-center justify-center space-y-4 text-center">
           <div className="space-y-2">
             <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl">תהליך הבדיקה</h2>
             <p className="mx-auto max-w-[700px] text-muted-foreground md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed">
               להלן פירוט השירותים שיינתנו במעמד בדיקת הנכס
             </p>
           </div>
-        </div>
-
-        <div className="mx-auto max-w-4xl mt-12">
-          <Card>
+        </header>
+        <div 
+          className="mx-auto grid max-w-5xl grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-4 mt-12"
+          role="list"
+          aria-label="שלבי תהליך הבדיקה"
+        >
+          <Card className="text-center" role="listitem">
             <CardHeader>
-              <CardTitle className="text-center">
-                חוות הדעת מבוססת על בדיקה ויזואלית מעמיקה, תוך שימוש בכלים מתקדמים
-              </CardTitle>
+              <div className="mx-auto flex h-12 w-12 items-center justify-center rounded-full bg-brand-red">
+                <Search className="h-6 w-6 text-white" aria-hidden="true" />
+              </div>
+              <CardTitle className="text-lg">בדיקה מקדימה</CardTitle>
             </CardHeader>
-            <CardContent className="grid grid-cols-1 md:grid-cols-2 gap-4 pt-4">
-              <div className="flex items-start gap-3">
-                <CheckCircle className="h-5 w-5 text-brand-red flex-shrink-0 mt-0.5" />
-                <p className="text-sm">בדיקת שיפועים במקלחות ובמרפסת</p>
-              </div>
-              <div className="flex items-start gap-3">
-                <CheckCircle className="h-5 w-5 text-brand-red flex-shrink-0 mt-0.5" />
-                <p className="text-sm">בדיקת תקינות הריצוף (רובה, פגמים)</p>
-              </div>
-              <div className="flex items-start gap-3">
-                <CheckCircle className="h-5 w-5 text-brand-red flex-shrink-0 mt-0.5" />
-                <p className="text-sm">בדיקת מידות הדירה בלייזר והתאמה לתכניות</p>
-              </div>
-              <div className="flex items-start gap-3">
-                <CheckCircle className="h-5 w-5 text-brand-red flex-shrink-0 mt-0.5" />
-                <p className="text-sm">בדיקת אלומיניום - תקינות תריסים, גומיות, איטום בהיקף החלונות ומנגנון הפעלה</p>
-              </div>
-              <div className="flex items-start gap-3">
-                <CheckCircle className="h-5 w-5 text-brand-red flex-shrink-0 mt-0.5" />
-                <p className="text-sm">בדיקת מסגרות ומעקות</p>
-              </div>
-              <div className="flex items-start gap-3">
-                <CheckCircle className="h-5 w-5 text-brand-red flex-shrink-0 mt-0.5" />
-                <p className="text-sm">בדיקת נגרות - ארונות מטבח, ארונות אמבטיה ודלתות פנים</p>
-              </div>
-              <div className="flex items-start gap-3">
-                <CheckCircle className="h-5 w-5 text-brand-red flex-shrink-0 mt-0.5" />
-                <p className="text-sm">בדיקת ממ"ד</p>
-              </div>
-              <div className="flex items-start gap-3">
-                <CheckCircle className="h-5 w-5 text-brand-red flex-shrink-0 mt-0.5" />
-                <p className="text-sm">בדיקת סדקים וסטייה בקירות</p>
-              </div>
-              <div className="flex items-start gap-3">
-                <CheckCircle className="h-5 w-5 text-brand-red flex-shrink-0 mt-0.5" />
-                <p className="text-sm">ובדיקות נוספות בהתאם לדרישה</p>
-              </div>
+            <CardContent>
+              <p className="text-sm text-muted-foreground">
+                סקירה ראשונית של הנכס וזיהוי אזורים הדורשים תשומת לב מיוחדת
+              </p>
             </CardContent>
           </Card>
-
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-12">
-            <Card>
-              <CardHeader className="pb-2">
-                <Ruler className="h-10 w-10 text-brand-red mb-2" />
-                <CardTitle className="text-lg">בדיקה מקצועית</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <p className="text-sm text-muted-foreground">
-                  בדיקה יסודית ומקיפה על ידי מהנדס בניין מוסמך, תוך שימוש בכלי מדידה מתקדמים
-                </p>
-              </CardContent>
-            </Card>
-            <Card>
-              <CardHeader className="pb-2">
-                <Search className="h-10 w-10 text-brand-red mb-2" />
-                <CardTitle className="text-lg">איתור ליקויים</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <p className="text-sm text-muted-foreground">
-                  איתור ליקויי בנייה בכל רכיבי הדירה, כולל ליקויים נסתרים שעלולים להתגלות בעתיד
-                </p>
-              </CardContent>
-            </Card>
-            <Card>
-              <CardHeader className="pb-2">
-                <FileText className="h-10 w-10 text-brand-red mb-2" />
-                <CardTitle className="text-lg">דוח מפורט</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <p className="text-sm text-muted-foreground">
-                  כתיבת דוח בדיקה מפורט הקביל בבית המשפט, כולל המלצות לטיפול בליקויים
-                </p>
-              </CardContent>
-            </Card>
-          </div>
+          <Card className="text-center" role="listitem">
+            <CardHeader>
+              <div className="mx-auto flex h-12 w-12 items-center justify-center rounded-full bg-brand-red">
+                <Ruler className="h-6 w-6 text-white" aria-hidden="true" />
+              </div>
+              <CardTitle className="text-lg">מדידות מדויקות</CardTitle>
+            </CardHeader>
+            <CardContent>
+              <p className="text-sm text-muted-foreground">
+                ביצוע מדידות מדויקות באמצעות ציוד מקצועי לבדיקת שיפועים, פילוס ומפלסים
+              </p>
+            </CardContent>
+          </Card>
+          <Card className="text-center" role="listitem">
+            <CardHeader>
+              <div className="mx-auto flex h-12 w-12 items-center justify-center rounded-full bg-brand-red">
+                <CheckCircle className="h-6 w-6 text-white" aria-hidden="true" />
+              </div>
+              <CardTitle className="text-lg">תיעוד הליקויים</CardTitle>
+            </CardHeader>
+            <CardContent>
+              <p className="text-sm text-muted-foreground">
+                תיעוד מפורט של כל הליקויים שנמצאו כולל צילום ורישום מדויק של המיקום
+              </p>
+            </CardContent>
+          </Card>
+          <Card className="text-center" role="listitem">
+            <CardHeader>
+              <div className="mx-auto flex h-12 w-12 items-center justify-center rounded-full bg-brand-red">
+                <FileText className="h-6 w-6 text-white" aria-hidden="true" />
+              </div>
+              <CardTitle className="text-lg">הכנת דוח</CardTitle>
+            </CardHeader>
+            <CardContent>
+              <p className="text-sm text-muted-foreground">
+                הכנת דוח מפורט הכולל תמונות, הסברים מקצועיים והמלצות לתיקון
+              </p>
+            </CardContent>
+          </Card>
         </div>
       </div>
     </section>
