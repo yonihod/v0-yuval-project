@@ -1,5 +1,5 @@
 import type React from "react"
-import type { Metadata } from "next"
+import type { Metadata, Viewport } from "next"
 import { Inter } from "next/font/google"
 import "./globals.css"
 import { ThemeProvider } from "@/components/theme-provider"
@@ -14,7 +14,6 @@ export const metadata: Metadata = {
   generator: 'v0.dev',
   keywords: "בדק בית, home inspection, קונטור הנדסה, בדיקת בית, הנדסאי בניין",
   authors: [{ name: "קונטור הנדסה" }],
-  viewport: "width=device-width, initial-scale=1",
   robots: "index, follow",
   openGraph: {
     title: "קונטור הנדסה - בדק בית מקצועי",
@@ -22,6 +21,11 @@ export const metadata: Metadata = {
     type: "website",
     locale: "he_IL",
   }
+}
+
+export const viewport: Viewport = {
+  width: 'device-width',
+  initialScale: 1,
 }
 
 export default function RootLayout({

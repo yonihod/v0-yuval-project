@@ -189,7 +189,7 @@ export function AccessibilityWidget() {
     <>
       {/* Widget Toggle Button */}
       <Button
-        className="fixed bottom-4 left-4 z-50 h-14 w-14 rounded-full bg-blue-600 hover:bg-blue-700 shadow-lg"
+        className="fixed bottom-4 left-4 z-[9999] h-14 w-14 rounded-full bg-blue-600 hover:bg-blue-700 shadow-lg"
         onClick={() => setIsOpen(!isOpen)}
         aria-label={isOpen ? "סגור כלי נגישות" : "פתח כלי נגישות (Alt+Z)"}
         aria-expanded={isOpen}
@@ -199,7 +199,7 @@ export function AccessibilityWidget() {
 
       {/* Accessibility Panel */}
       {isOpen && (
-        <Card className="fixed bottom-20 left-4 z-50 w-80 max-h-96 overflow-y-auto bg-white shadow-xl border">
+        <Card className="fixed bottom-20 left-4 z-[9999] w-80 max-h-96 overflow-y-auto bg-white shadow-xl border">
           <div className="p-4 border-b flex items-center justify-between">
             <h3 className="text-lg font-semibold flex items-center gap-2">
               <Accessibility className="h-5 w-5" />
