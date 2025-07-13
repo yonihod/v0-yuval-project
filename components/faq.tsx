@@ -75,13 +75,13 @@ export default function FAQ() {
             <AccordionItem value="item-5">
               <AccordionTrigger 
                 className="text-right"
-                aria-label="האם אתם מבצעים גם בדיקות רטיבות?"
+                aria-label="האם אתם מבצעים גם בדיקות אינדיקציה לרטיבות?"
               >
-                האם אתם מבצעים גם בדיקות רטיבות?
+                האם אתם מבצעים גם בדיקות אינדיקציה לרטיבות?
               </AccordionTrigger>
               <AccordionContent className="text-right">
-                כן, אנו מתמחים באיתור מקורות רטיבות ונזילות באמצעות ציוד מתקדם כמו מצלמה טרמית ומצלמת סיב אופטי,
-                המאפשרים לנו לאתר את מקור הבעיה ללא הרס מיותר.
+                כן, אנו מתמחים באבחון אינדיקציות לרטיבות באמצעות שימוש במצלמה טרמית ומד לחות מתקדמים,
+                המאפשרים לנו לאבחן אינדיקציות לרטיבות ללא הרס מיותר.
               </AccordionContent>
             </AccordionItem>
             <AccordionItem value="item-6">
